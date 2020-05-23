@@ -29,6 +29,7 @@ const inputStyle=InputDecoration(
     ),
   ),
   focusedErrorBorder: OutlineInputBorder(
+    borderRadius: BorderRadius.all(Radius.circular(30.0)),
     borderSide: BorderSide(
       color: Colors.red,
       width: 2.0,
