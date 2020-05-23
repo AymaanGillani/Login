@@ -125,63 +125,6 @@ class _LoginState extends State<Login> {
                                 ),
                               ],
                             ),
-                            // RaisedButton(
-                            //   padding: EdgeInsets.symmetric(vertical: 13.0),
-                            //   color: Colors.white,
-                            //   shape: RoundedRectangleBorder(
-                            //     borderRadius: BorderRadius.circular(40.0),
-                            //   ),
-                            //   child: Row(
-                            //     mainAxisAlignment: MainAxisAlignment.center,
-                            //     children: <Widget>[
-                            //       Expanded(
-                            //         flex: 2,
-                            //         child: Image.asset(
-                            //           'assets/google_icon.png',
-                            //           height: 32.0,
-                            //         ),
-                            //       ),
-                            //       Expanded(
-                            //         flex: 5,
-                            //         child: Text(
-                            //           'Sign in with Google',
-                            //           style: TextStyle(fontSize: 18.0),
-                            //         ),
-                            //       ),
-                            //     ],
-                            //   ),
-                            //   onPressed: () {},
-                            // ),
-                            // SizedBox(height: 20.0),
-                            // RaisedButton(
-                            //   padding: EdgeInsets.symmetric(vertical: 13.0),
-                            //   color: Colors.blue[900],
-                            //   shape: RoundedRectangleBorder(
-                            //     borderRadius: BorderRadius.circular(40.0),
-                            //   ),
-                            //   child: Row(
-                            //     mainAxisAlignment: MainAxisAlignment.center,
-                            //     children: <Widget>[
-                            //       Expanded(
-                            //         flex: 2,
-                            //         child: Image.asset(
-                            //           'assets/facebook_icon.png',
-                            //           height: 32.0,
-                            //         ),
-                            //       ),
-                            //       Expanded(
-                            //         flex: 5,
-                            //         child: Text(
-                            //           'Continue with Facebook',
-                            //           style: TextStyle(
-                            //               fontSize: 18.0,
-                            //               color: Colors.white),
-                            //         ),
-                            //       ),
-                            //     ],
-                            //   ),
-                            //   onPressed: () {},
-                            // ),
                           ],
                         ),
                       ],
