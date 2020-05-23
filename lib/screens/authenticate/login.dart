@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:login/styles/textstyle.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,180 +24,248 @@ class _LoginState extends State<Login> {
             currentFocus.unfocus();
           }
         },
-        child: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                    vertical: 20.0, horizontal: 16.0),
-                child: Column(
-                  children: <Widget>[
-                    Padding(
-                      padding:
-                          const EdgeInsets.fromLTRB(16.0, 70.0, 16.0, 30.0),
-                      child: Text(
-                        'Hello\nThere!',
-                        style: GoogleFonts.specialElite(textStyle: welcomeText),
-                      ),
+        child: Column(
+          children: <Widget>[
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 20.0, horizontal: 16.0),
+              child: Column(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16.0, 70.0, 16.0, 30.0),
+                    child: Text(
+                      'Hello\nThere!',
+                      style: GoogleFonts.specialElite(textStyle: welcomeText),
                     ),
-                    Form(
-                      child: Column(
+                  ),
+                  Form(
+                    child: Column(
+                      children: <Widget>[
+                        TextFormField(
+                          decoration: inputStyle.copyWith(
+                            labelText: 'Your Email',
+                            prefixIcon: Icon(Icons.email),
+                          ),
+                        ),
+                        SizedBox(height: 20.0),
+                        TextFormField(
+                          decoration: inputStyle.copyWith(
+                            labelText: 'Password',
+                            prefixIcon: Icon(Icons.lock),
+                            suffixIcon: IconButton(
+                                highlightColor: Colors.transparent,
+                                splashColor: Colors.transparent,
+                                icon: Icon(_obscureText
+                                    ? Icons.visibility
+                                    : Icons.visibility_off),
+                                onPressed: () {
+                                  setState(() {
+                                    _obscureText = !_obscureText;
+                                  });
+                                }),
+                          ),
+                          obscureText: _obscureText,
+                        ),
+                        SizedBox(height: 20.0),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: <Widget>[
+                            RaisedButton(
+                              color: Colors.blueAccent,
+                              padding: EdgeInsets.symmetric(vertical: 18.0),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(40.0),
+                              ),
+                              child: Text(
+                                'Login',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20.0,
+                                ),
+                              ),
+                              onPressed: () {},
+                            ),
+                            SizedBox(height: 20.0),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                InkWell(
+                                  onTap: () {
+                                    print("Forgot Password");
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      'Need an account? Register.',
+                                      style: TextStyle(
+                                        color: Colors.indigo[900],
+                                        fontWeight: FontWeight.bold,
+                                        decoration: TextDecoration.underline,
+                                        decorationThickness: 1.7,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    print("Forgot Password");
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      'Forgot password?',
+                                      style: TextStyle(
+                                        color: Colors.indigo[900],
+                                        fontWeight: FontWeight.bold,
+                                        decoration: TextDecoration.underline,
+                                        decorationThickness: 1.7,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            // RaisedButton(
+                            //   padding: EdgeInsets.symmetric(vertical: 13.0),
+                            //   color: Colors.white,
+                            //   shape: RoundedRectangleBorder(
+                            //     borderRadius: BorderRadius.circular(40.0),
+                            //   ),
+                            //   child: Row(
+                            //     mainAxisAlignment: MainAxisAlignment.center,
+                            //     children: <Widget>[
+                            //       Expanded(
+                            //         flex: 2,
+                            //         child: Image.asset(
+                            //           'assets/google_icon.png',
+                            //           height: 32.0,
+                            //         ),
+                            //       ),
+                            //       Expanded(
+                            //         flex: 5,
+                            //         child: Text(
+                            //           'Sign in with Google',
+                            //           style: TextStyle(fontSize: 18.0),
+                            //         ),
+                            //       ),
+                            //     ],
+                            //   ),
+                            //   onPressed: () {},
+                            // ),
+                            // SizedBox(height: 20.0),
+                            // RaisedButton(
+                            //   padding: EdgeInsets.symmetric(vertical: 13.0),
+                            //   color: Colors.blue[900],
+                            //   shape: RoundedRectangleBorder(
+                            //     borderRadius: BorderRadius.circular(40.0),
+                            //   ),
+                            //   child: Row(
+                            //     mainAxisAlignment: MainAxisAlignment.center,
+                            //     children: <Widget>[
+                            //       Expanded(
+                            //         flex: 2,
+                            //         child: Image.asset(
+                            //           'assets/facebook_icon.png',
+                            //           height: 32.0,
+                            //         ),
+                            //       ),
+                            //       Expanded(
+                            //         flex: 5,
+                            //         child: Text(
+                            //           'Continue with Facebook',
+                            //           style: TextStyle(
+                            //               fontSize: 18.0,
+                            //               color: Colors.white),
+                            //         ),
+                            //       ),
+                            //     ],
+                            //   ),
+                            //   onPressed: () {},
+                            // ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: ClipPath(
+                clipper: MyClipper(),
+                child: Container(
+                  color: Colors.blue,
+                  width: MediaQuery.of(context).size.width,
+                  child: Column(
+                    children: <Widget>[
+                      SizedBox(height: 60.0,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
-                          TextFormField(
-                            decoration: inputStyle.copyWith(
-                              labelText: 'Your Email',
-                              prefixIcon: Icon(Icons.email),
+                          RaisedButton(
+                            color: Colors.white,
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Image.asset(
+                                'assets/google_icon.png',
+                                height: 40.0,
+                              ),
                             ),
+                            onPressed: () {},
+                            shape: CircleBorder(),
                           ),
-                          SizedBox(height: 20.0),
-                          TextFormField(
-                            decoration: inputStyle.copyWith(
-                              labelText: 'Password',
-                              prefixIcon: Icon(Icons.lock),
-                              suffixIcon: IconButton(
-                                  highlightColor: Colors.transparent,
-                                  splashColor: Colors.transparent,
-                                  icon: Icon(_obscureText
-                                      ? Icons.visibility
-                                      : Icons.visibility_off),
-                                  onPressed: () {
-                                    setState(() {
-                                      _obscureText = !_obscureText;
-                                    });
-                                  }),
+                          RaisedButton(
+                            color: Colors.blue[900],
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Image.asset(
+                                'assets/facebook_icon.png',
+                                height: 32.0,
+                              ),
                             ),
-                            obscureText: _obscureText,
+                            onPressed: () {},
+                            shape: CircleBorder(),
                           ),
-                          SizedBox(height: 20.0),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: <Widget>[
-                              RaisedButton(
-                                color: Colors.blueAccent,
-                                padding: EdgeInsets.symmetric(vertical: 18.0),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(40.0),
-                                ),
-                                child: Text(
-                                  'Login',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20.0,
-                                  ),
-                                ),
-                                onPressed: () {},
+                          RaisedButton(
+                            color: Colors.blue[300],
+                            child: Padding(
+                              padding: const EdgeInsets.all(17.0),
+                              child: Image.asset(
+                                'assets/twitter_icon.png',
+                                height: 32.0,
                               ),
-                              SizedBox(height: 20.0),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  InkWell(
-                                    onTap: () {
-                                      print("Forgot Password");
-                                    },
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        'Need an account? Register.',
-                                        style: TextStyle(
-                                          color: Colors.indigo[900],
-                                          fontWeight: FontWeight.bold,
-                                          decoration: TextDecoration.underline,
-                                          decorationThickness: 1.7,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  InkWell(
-                                    onTap: () {
-                                      print("Forgot Password");
-                                    },
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        'Forgot password?',
-                                        style: TextStyle(
-                                          color: Colors.indigo[900],
-                                          fontWeight: FontWeight.bold,
-                                          decoration: TextDecoration.underline,
-                                          decorationThickness: 1.7,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: 20.0),
-                              RaisedButton(
-                                padding: EdgeInsets.symmetric(vertical: 13.0),
-                                color: Colors.white,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(40.0),
-                                ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Expanded(
-                                      flex: 2,
-                                      child: Image.asset(
-                                        'assets/google_icon.png',
-                                        height: 32.0,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      flex: 5,
-                                      child: Text(
-                                        'Sign in with Google',
-                                        style: TextStyle(fontSize: 18.0),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                onPressed: () {},
-                              ),
-                              SizedBox(height: 20.0),
-                              RaisedButton(
-                                padding: EdgeInsets.symmetric(vertical: 13.0),
-                                color: Colors.blue[900],
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(40.0),
-                                ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Expanded(
-                                      flex: 2,
-                                      child: Image.asset(
-                                        'assets/facebook_icon.png',
-                                        height: 32.0,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      flex: 5,
-                                      child: Text(
-                                        'Continue with Facebook',
-                                        style: TextStyle(
-                                            fontSize: 18.0,
-                                            color: Colors.white),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                onPressed: () {},
-                              ),
-                            ],
+                            ),
+                            onPressed: () {},
+                            shape: CircleBorder(),
                           ),
                         ],
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
+  }
+}
+
+class MyClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    var path = Path();
+    path.lineTo(0, 50);
+    path.quadraticBezierTo(size.width / 2, 0, size.width, 50);
+    path.lineTo(size.width, size.height);
+    path.lineTo(0, size.height);
+    path.close();
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) {
+    return true;
   }
 }
