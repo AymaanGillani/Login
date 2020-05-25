@@ -21,7 +21,7 @@ class _LoginState extends State<Login> {
       resizeToAvoidBottomPadding: false,
       backgroundColor: Colors.blue[50],
       body: SingleChildScrollView(
-              child: GestureDetector(
+        child: GestureDetector(
           onTap: () {
             FocusScopeNode currentFocus = FocusScope.of(context);
 
@@ -32,12 +32,12 @@ class _LoginState extends State<Login> {
           child: Column(
             children: <Widget>[
               Padding(
-                padding:
-                    const EdgeInsets.fromLTRB(16.0, 20.0, 16.0, 0.0),
+                padding: const EdgeInsets.fromLTRB(16.0, 20.0, 16.0, 0.0),
                 child: Column(
                   children: <Widget>[
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(16.0, 70.0, 16.0, 30.0),
+                      padding:
+                          const EdgeInsets.fromLTRB(16.0, 70.0, 16.0, 30.0),
                       child: Text(
                         'Hello\nThere!',
                         style: GoogleFonts.specialElite(textStyle: welcomeText),
@@ -110,7 +110,8 @@ class _LoginState extends State<Login> {
                               ),
                               SizedBox(height: 20.0),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
                                   InkWell(
                                     onTap: () {
@@ -161,55 +162,54 @@ class _LoginState extends State<Login> {
                 child: Container(
                   color: Colors.blue,
                   width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height*22/100,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: <Widget>[
-                      SizedBox(
-                        height: 70.0,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          RaisedButton(
-                            color: Colors.white,
-                            child: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Image.asset(
-                                'assets/google_icon.png',
-                                height: 40.0,
-                              ),
+                  height: MediaQuery.of(context).size.height > 500
+                      ? MediaQuery.of(context).size.height * 25 / 100
+                      : MediaQuery.of(context).size.height * 40 / 100,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 30.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        RaisedButton(
+                          color: Colors.white,
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Image.asset(
+                              'assets/google_icon.png',
+                              height: 40.0,
                             ),
-                            onPressed: () {},
-                            shape: CircleBorder(),
                           ),
-                          RaisedButton(
-                            color: Colors.blue[900],
-                            child: Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: Image.asset(
-                                'assets/facebook_icon.png',
-                                height: 32.0,
-                              ),
+                          onPressed: () {},
+                          shape: CircleBorder(),
+                        ),
+                        RaisedButton(
+                          color: Colors.blue[900],
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Image.asset(
+                              'assets/facebook_icon.png',
+                              height: 32.0,
                             ),
-                            onPressed: () {},
-                            shape: CircleBorder(),
                           ),
-                          RaisedButton(
-                            color: Colors.blue[300],
-                            child: Padding(
-                              padding: const EdgeInsets.all(17.0),
-                              child: Image.asset(
-                                'assets/twitter_icon.png',
-                                height: 32.0,
-                              ),
+                          onPressed: () {
+                            print(MediaQuery.of(context).size.height);
+                          },
+                          shape: CircleBorder(),
+                        ),
+                        RaisedButton(
+                          color: Colors.blue[300],
+                          child: Padding(
+                            padding: const EdgeInsets.all(17.0),
+                            child: Image.asset(
+                              'assets/twitter_icon.png',
+                              height: 32.0,
                             ),
-                            onPressed: () {},
-                            shape: CircleBorder(),
                           ),
-                        ],
-                      ),
-                    ],
+                          onPressed: () {},
+                          shape: CircleBorder(),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
